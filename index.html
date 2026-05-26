@@ -260,7 +260,7 @@ p.rp strong{font-weight:600;color:var(--ink)}
       <tr><td>SPA de Cornouaille - Concarneau</td><td>28 941</td><td>198 662</td><td>454 946</td><td>709 411</td></tr>
     </tbody>
   </table>
-  <div class="rcallout rcr"><div class="rci">&#9888;</div><div><strong>Biais SPA Lorient :</strong> les isochrones du sud-est integrent partiellement la couverture de la SPA de Lorient (Morbihan). Les chiffres de Quimper et Concarneau sont legerement surestimes dans une optique strictement finisterienne.</div></div>
+  <div class="rcallout rcr"><div class="rci">&#9888;</div><div><strong>Biais SPA Lorient :</strong> les isochrones du sud-est n integrent pas la couverture de la SPA de Lorient (Morbihan). Les chiffres de Quimper et Concarneau sont legerement sous-estimes dans une optique strictement finisterienne.</div></div>
 </section>
 
 <section class="rsect" id="sec3">
@@ -517,7 +517,7 @@ var GROUPS=[
   ]},
   {g:"Zones candidates",items:[
     {id:'zxxl',label:'Zone candidate XXL (5km clusters)',color:'#1a7f6e',vis:true,mode:'inline',mk:function(){return mkPoly(GJ.zxxl,'#1a7f6e',0.12,1,'#1a7f6e');} },
-    {id:'zfin',label:'Zone candidate',color:'#2a8f5a',vis:true,bold:true,mode:'inline',mk:function(){return mkPoly(GJ.zfin,'#2a8f5a',0.25,1.5,'#2a8f5a');} },
+    {id:'zfin',label:'Zone candidate (1km autour des RNs)',color:'#2a8f5a',vis:true,bold:true,mode:'inline',mk:function(){return mkPoly(GJ.zfin,'#2a8f5a',0.25,1.5,'#2a8f5a');} },
     {id:'zlrg',label:'Zone candidate apres exclusions',color:'#8f6a2a',vis:false,mode:'fetch',src:'zone_implant_large.geojson',mk:function(d){return mkPoly(d,'#8f6a2a',0.2,0.8,'#8f6a2a');},note:'~6 MB'},
     
     
