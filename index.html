@@ -1964,30 +1964,45 @@ document.addEventListener('DOMContentLoaded',function(){
 
 var IDS = ['panel-carte','panel-rapport','panel-avancee','panel-portail'];
 
-function showPanel(name){
-  // 1. On prépare l'identifiant par défaut
-  var tid = 'panel-' + name;
-  
-  // 2. CORRECTION : On change l'identifiant AVANT de chercher l'élément dans le HTML
-  if(name==='avancee') tid = 'xp-av';
-  if(name==='portail') tid = 'xp-pt';
+function showPanel(name) {
+  // 1. Dictionnaire de correspondance complet entre l'onglet et l'ID HTML
+  var map2id = {
+    carte: 'panel-carte', 
+    rapport: 'panel-rapport', 
+    avancee: 'panel-avancee', 
+    portail: 'panel-portail'
+  };
 
-  // 3. Maintenant on récupère le bon élément existant
+  // 2. Liste complète de TOUS les panneaux pour s'assurer qu'ils se masquent bien
+  var tousLesPanneaux = ['panel-carte', 'panel-rapport', 'panel-avancee', 'panel-portail'];
+
+  // Masquer absolument tout le monde avant d'afficher le bon
+  tousLesPanneaux.forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    el.style.cssText = 'display:none!important;visibility:hidden;pointer-events:none;';
+    el.classList.remove('panel-visible');
+  });
+
+  // 3. Afficher la cible demandée
+  var tid = map2id[name];
   var el = tid ? document.getElementById(tid) : null;
-  
   if(el){
     var disp = (name==='rapport') ? 'block' : 'flex';
     el.style.cssText = 'display:'+disp+'!important;visibility:visible;pointer-events:auto;';
     el.classList.add('panel-visible');
   }
-  
+
+  // Ajustement de la carte Leaflet
   if(name==='carte' && typeof map!=='undefined' && map)
     setTimeout(function(){ map.invalidateSize(); }, 80);
-    
+
+  // Gestion de l'état actif des onglets de navigation
   document.querySelectorAll('.ntab').forEach(function(b){ b.classList.remove('active'); });
   var ab = document.getElementById('ntab-'+name);
   if(ab) ab.classList.add('active');
 }
+
 function showPortailPage(id,btn){
   document.querySelectorAll('.pp').forEach(function(p){ p.classList.remove('active'); });
   document.querySelectorAll('#pt-nav button').forEach(function(b){ b.classList.remove('active'); });
